@@ -1,0 +1,113 @@
+
+[project.urls]
+"Homepage" = "https://github.com/PBorocz/raindrop-io-cli"
+"Documentation" = "https://raindrop-io-cli.rtfd.io"
+
+[tool.poetry]
+name = "raindrop-io-cli"
+version = "0.1.8"
+description = "Terminal-based interface for Raindrop.io bookmark manager"
+authors = ["Peter Borocz <peter.borocz+raindrop-io-py@google.com>"]
+classifiers = ['License :: OSI Approved :: MIT License', 'Programming Language :: Python :: 3']
+include = ["LICENSE",]
+keywords = ["python"]
+license = "MIT"
+readme = "README.md"
+homepage = "https://github.com/PBorocz/raindrop-io-cli"
+documentation = "https://raindrop-io-cli.rtfd.io"
+packages = [{ include = "raindropiocli" }]
+
+[tool.poetry.scripts]
+raindrop-io-cli = "raindropiocli.cli:main"
+
+[tool.poetry.dependencies]
+python = ">=3.11,<4.0"
+python-dotenv = "^1.0.0"
+tomli = "^2.0.1"
+humanize = "^4.4.0"
+prompt-toolkit = "^3.0.36"
+rich = "13.3.5"
+pydantic = "^1.10.4"
+raindrop-io-py = {path = "/Users/peter/Repository/10-19 Development/10 Development/10.17 raindrop-io-py/raindrop-io-py" }
+
+[tool.poetry.group.dev.dependencies]
+pre-commit = "^2.21.0"
+pytest = "^7.2.1"
+vulture = "^2.7"
+vcrpy = "^4.2.1"
+pexpect = "^4.8.0"
+fawltydeps = "^0.13.3"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+markers = [
+    "unit: marks tests as runnable all the time, locally and fast.",
+    "integration: tests that run against a live Raindrop environment, slower.",
+]
+
+[tool.ruff]
+target-version = "py311"
+line-length = 120
+select = [
+       # Which Ruff suites are we running?
+       # (presented in order from the Ruff documentation page)
+       "F",                          # Pyflakes
+       "E", "W",                     # Pycodestyle (Errors and Warnings respectively)
+       "C90",                        # Mccabe
+       "I",                          # Isort
+       "D",                          # Pydocstyle
+       "UP",                         # pyupgrade
+       "N",                          # pep8-naming
+       "YTT",                        # flake8-2020
+       # "ANN",                      # flake8-annotations
+       # "S",                        # flake8-bandit
+       # "BLE",                      # flake8-blind-except
+       # "FBT",                      # flake8-boolean-trap
+       "B",                          # flake8-bugbear
+       # "A",                        # flake8-builtins (NO! We use "id" as an attribute, sue me...)
+       # "C4",                       # flake8-comprehensions
+       "T10",                        # flake8-debugger
+       # "EM",                       # flake8-errmsg
+       # "ISC",                      # flake8-implicit-str-concat
+       # "ICN",                      # flake8-import-conventions
+       # "T20",                      # flake8-print (NO! Removes all print statements!!)
+       # "PT",                       # flake8-pytest-style
+       "Q",                          # flake8-quotes
+       # "RET",                      # flake8-return
+       # "SIM",                      # flake8-simplify
+       # "TID",                      # flake8-tidy-imports
+       # "ARG",                      # flake8-unused-arguments
+       # "DTZ",                      # flake8-datetimez
+       # "ERA",                      # eradicate
+       # "PD",                       # pandas-vet
+       # "PGH",                      # pygrep-hooks
+       # "PLC", "PLE", "PLR", "PLW", # pylint
+       # "PIE",                      # flake8-pie
+       # "COM",                      # flake8-commas
+       "RUF",                        # Ruff-specific rules
+       ]
+ignore = [
+  "D213",
+  "E402",
+  "I001",
+  "C901", # 'process' is too complex (1 case only)
+  "COM812",
+]
+
+[tool.ruff.pydocstyle]
+# For more info, see:
+# https://github.com/charliermarsh/ruff#does-ruff-support-numpy--or-google-style-docstrings
+convention = "google"
+
+[tool.ruff.mccabe]
+max-complexity = 13
+
+[tool.vulture]
+# Look for dead code (methods, variables etc.): https://github.com/jendrikseipp/vulture
+# But NOT through pre-commit! (see api/models.py:create_link for explanation)
+min_confidence = 80
+paths = ["raindropiocli", "examples"]
+
+[build-system]
+requires = ["poetry-core>=1.0.0", "setuptools"]
+build-backend = "poetry.core.masonry.api"
