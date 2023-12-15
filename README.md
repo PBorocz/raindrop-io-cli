@@ -17,23 +17,17 @@ This package is a proof-of-concept for this API that serves my needs to interact
 
 Requires Python 3.10 or later (well, at least I'm developing against 3.11.3).
 
-## Install
-
-```shell
-[.venv] python -m pip install raindrop-io-cli
-```
-
 ## Setup
 
 To use this package, besides your own account on [Raindrop](https://raindrop.io), you'll need to create an `integration app` on the Raindrop.io site from which you can create API token(s).
 
 -   Go to [<https://app.draindrop.api/settings/integrations>](https://app.raindrop.io/settings/integrations) and select `+ create new app`.
 
--   Give it a descriptive name and then select the app you just created.
+- Give it a descriptive name and then select the app you just created.
 
--   Select `Create test token` and copy the token provided. Note that the basis for calling it a _test_ token is that it only gives you access to bookmarks within *your own account*. Raindrop allows you to use their API against other people's environments using oAuth (see untested/unsupported `flask_oauth.py` file in /examples)
+- Select `Create test token` and copy the token provided. Note that the basis for calling it a _test_ token is that it only gives you access to bookmarks within *your own account*. Raindrop allows you to use their API against other people's environments using oAuth (see untested/unsupported `flask_oauth.py` file in /examples)
 
--   Save your token into your environment (we use python-dotenv so a simple .env/.envrc file containing your token should suffice), for example:
+- Save your token into your environment (we use python-dotenv so a simple .env/.envrc file containing your token should suffice), for example:
 
 ```shell
 # If you use direnv or it's equivalent, place something like this in a .env file:
